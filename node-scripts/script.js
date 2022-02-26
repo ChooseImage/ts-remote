@@ -1,6 +1,7 @@
 /* 
 
-Bottons for field and processing call requests
+Buttons for field and processing call requests
+line by line chatbot 
 
 */
 
@@ -9,38 +10,72 @@ const { Configuration, OpenAIApi } = require("openai");
 let ui = null;
 let prompt = null;
 let userInput;
-let  numToken = 10;
-let nTimesPressed = 1;
+let  numToken = 2;
+let nTimesPressed = 0;
+let prompt01 = "First_Prompt";
+let userName = 'user';
+let botName = 'Callaway';
+let convo = null;
 
 // Place to store all the priming dreams
-let primeMats;
+let primeMats='';
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY
 });
 
 
+
+
+//nameInput();
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
 
   ui = document.querySelector('.ui');
   primes = document.querySelector('#primes');
+  convo = document.querySelector('.convo');
+  //Lprimes = document.querySelector('#Lprimes');
+
+  // set/store user name
+
+  //userName = window.prompt("Please enter your name:", "User");
+
+  // The first prompt on load
+
+
+  let initPrompt = `
+    <div>
+    <p>${prompt01}</p>
+    </div>
+  `
+
+  // ------------------------------------------------------------- // 
+
+  // const p1 = document.createElement('div');
+
+  // p1.innerHTML = initPrompt;
+  //Lprimes.insertAdjacentElement("afterbegin", p1);
+
 
 
   // btn handling adding fields 
 
-  document.querySelector('#btn-addField').addEventListener('click',()=>{
+  //document.querySelector('.btn').addEventListener('click',()=>{
     //Add field btn function
-    nTimesPressed++;
-    let field = `
-    </br>
-      <input type="text" id="userPrimes${nTimesPressed}" name="userPrime">
-    `;
-
-    let inputField = document.createElement('div');
-    inputField.innerHTML = field;
-    primes.appendChild(inputField);
     
-  });
+  //   let field = `
+  //   </br>
+  //     <input type="text" id="userPrimes${nTimesPressed}" name="userPrime">
+  //   `;
+
+  //   let inputField = document.createElement('div');
+  //   inputField.innerHTML = field;
+  //   primes.appendChild(inputField);
+    
+    
+  // });
 
 
     /*
@@ -48,41 +83,56 @@ document.addEventListener('DOMContentLoaded', function () {
      making calls 
      */
 
-  document.querySelector('#btn').addEventListener('click',()=>{
+  document.querySelector(`#Lbtnsubmit0`).addEventListener('click',()=>{
 
-    //store user primes if there's any
-    //const up1 = document.getElementById('userPrime1').value;
+    // collect the first input and make request 
     
-    //concact primes
-    for(let i =1; i<= nTimesPressed; i++){
-      let id = `userPrimes${i}`
-      primeMats += document.getElementById(`userPrimes2`).value;
-    }
 
-
-    console.log(primeMats);
-
-
-  
-
-  
+      let id = `Linput${nTimesPressed}`
+      let input = document.getElementById(`${id}`).value;
+    
     //get prompt
+    //condition ? exprIfTrue : exprIfFalse
+    userInput = `U: ${input}`;
 
-    userInput = document.getElementById('prompt').value;
-    console.log("-------------------------")
-    console.log("prompt: " + document.getElementById('prompt').value);
+    console.log(nTimesPressed);
+    
+    //console.log("prompt: " + document.getElementById('prompt').value);
+    console.log("-------------------------");
 
     //combine user Priming and prompts 
-    
-   // let modelPrompt = `${up1} \n ${up2} \n ${up3} \n ${userInput}`
-    //makecall(modelPrompt);
-  });
 
- // makecall('I went down the alley');
+    modelPrompt = primeMats + userInput;
+
+    nTimesPressed++;
+    
+    makecall(userInput);
+
+   
+
+    console.log(`call made, nTimePressed = ${nTimesPressed}`);
+    
+
+    //primeMats = [];
+
+  });
 
 });
 
 const openai = new OpenAIApi(configuration);
+
+const addField = () => {
+
+  // This goes in makecall(), need to wait the site to render the response first
+  
+  let html =`
+  <input type="text" id="Linput${nTimesPressed}" name="userPrime">
+                `
+
+  const p = document.createElement('div');
+  p.innerHTML = html;
+  convo.appendChild(p);
+}
 
 
 const makecall = (async (prompt) => {
@@ -92,19 +142,22 @@ const makecall = (async (prompt) => {
     console.log('making your request...');
 
       const response = await openai.createCompletionFromModel({
-          model:"MY_MODEL",
+          model:"davinci:ft-personal-2022-02-22-23-16-53",
           prompt: prompt,
-          max_tokens:numToken
+          max_tokens:numToken,
+          stop: '\n'
         });
   
         console.log(prompt+' '+response.data.choices[0].text);
-        let data = userInput+' '+response.data.choices[0].text;
-
-    
+        let data = response.data.choices[0].text;
+        data.replace('#', '');
+        //.replace('characterToReplace', '');
+        // data.replace(((nTimesPressed%2==1) ? "A:" : "B:"), '');
+        let displayText = `${botName}: ${data}`;
 
         let html = `
             <div>
-                <p>${data}</p>
+                <p>${displayText}</p>
             </div>
             `;
 
@@ -114,7 +167,9 @@ const makecall = (async (prompt) => {
         //"clearcontent('clear')
         
         p.innerHTML = html;
-        ui.appendChild(p);
+        convo.appendChild(p);
+
+        addField();
 
   });
   //makecall("Who's there?");

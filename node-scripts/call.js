@@ -2,6 +2,8 @@
 
 Buttons for field and processing call requests
 
+todo: Multiple stops, need to add '\nB'
+
 */
 
 require('dotenv').config()
@@ -9,7 +11,7 @@ const { Configuration, OpenAIApi } = require("openai");
 let ui = null;
 let prompt = null;
 let userInput;
-let  numToken = 10;
+let  numToken = 30;
 let nTimesPressed = 1;
 
 // Place to store all the priming dreams
@@ -86,6 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
     modelPrompt = primeMats + userInput;
     console.log(modelPrompt);
     
+    console.log(primeMats);
 
     makecall(modelPrompt);
 
@@ -105,13 +108,13 @@ const makecall = (async (prompt) => {
     console.log('making your request...');
 
       const response = await openai.createCompletionFromModel({
-          model:"MY_MODEL",
+          model:"davinci:ft-personal-2022-02-22-23-16-53",
           prompt: prompt,
           max_tokens:numToken,
-          stop: '\nA:'
+          stop: '\n'
         });
   
-        console.log(prompt+' '+response.data.choices[0].text);
+        //console.log(prompt+' '+response.data.choices[0].text);
         let data = response.data.choices[0].text;
 
         //.replace('characterToReplace', '');
