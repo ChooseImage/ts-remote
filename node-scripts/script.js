@@ -10,7 +10,7 @@ const { Configuration, OpenAIApi } = require("openai");
 let ui = null;
 let prompt = null;
 let userInput;
-let  numToken = 120;
+let  numToken = 100;
 let nTimesPressed = 0;
 let prompt01 = "A: When was this?\nB: Sunday afternoon I think, or is it Saturday?\nA: Were you alone?\nB: No, I remember seeing my mom, in the park, but younger.\n";
 let userName = 'user';
@@ -90,6 +90,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
       let id = `Linput${nTimesPressed}`
       let input = document.getElementById(`${id}`).value;
+      let INPUT = `
+        <div class = 'userArea'>
+          <p>${input}</p>
+        </div>
+      `
     
     //get prompt
     //condition ? exprIfTrue : exprIfFalse
@@ -114,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const p2 = document.createElement('div');
 
-    p2.innerHTML = input;
+    p2.innerHTML = INPUT;
     convo.insertAdjacentElement("beforeend", p2);
 
     nTimesPressed++;
@@ -162,7 +167,7 @@ const makecall = (async (prompt) => {
           model:"davinci:ft-personal-2022-02-22-23-16-53",
           prompt: prompt,
           max_tokens:numToken,
-          stop: ["A:"]
+          stop: ["A"]
         });
         
        // console.log(data);
