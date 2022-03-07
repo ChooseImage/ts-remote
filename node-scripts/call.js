@@ -5,6 +5,25 @@ line by line chatbot
 
 TODO: Cache current stage and pass to priming mats.
 
+TODO:
+Interaction -> 
+
+def ask(question, chat_log=None):
+    prompt_text = f'{chat_log}{restart_sequence}: {question}{start_sequence}:'
+    response = openai.Completion.create(
+      engine="davinci",
+      prompt=prompt_text,
+      temperature=0.8,
+      max_tokens=150,
+      top_p=1,
+      frequency_penalty=0,
+      presence_penalty=0.3,
+      stop=["\n"],
+    )
+
+    The following is a conversation with new character in a story.
+    The assistant is somber, creative, and cnocerned.
+
 */
 
 require('dotenv').config()
@@ -14,7 +33,7 @@ let prompt = null;
 let userInput;
 let  numToken = 30;
 let nTimesPressed = 0;
-let prompt01 = "A: When was this?\nB: Sunday afternoon I think, or is it Saturday?\nA: Were you alone?\nB: No, I remember seeing my mom, in the park, but younger.\n";
+let prompt01 = "The following is a conversation with new character in a story. The character is somber, creative, and cnocerned.\nA: When was this?\nB: Sunday afternoon I think, or is it Saturday?\nA: Were you alone?\nB: No, I remember seeing my mom, in the park, but younger.\n";
 let userName = 'user';
 let botName = 'A:';
 let convo = null;
