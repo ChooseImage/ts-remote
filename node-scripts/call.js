@@ -20,9 +20,6 @@ def ask(question, chat_log=None):
       stop=["\n"],
     )
 
-    The following is a conversation with new character in a story.
-    The assistant is somber, creative, and cnocerned.
-
 */
 
 let submitPressed = false;
@@ -166,14 +163,23 @@ const makecall = (async (prompt) => {
         
         let index = rawData.indexOf('B:');
 
-        if(index >0){
+        /*
+          !!!!!!!!
+            Check slice again
+            This appears to generat new responses not appears on console
+          !!!!!!!!
+        */
+
+        if(index <0){
+          console.log(`Original raw: ${rawData}`);
           newRawData = rawData.slice(index, rawData.length);
           console.log("Slicing: "+ newRawData);
+          console.log(dialog);
         }else{
           newRawData = rawData;
         }
 
-
+        newRawData.replace('###', '\n');
         console.log(`test-> ${newRawData}`);
         dialog+= newRawData;
         console.log('INDEX: ' + index);
@@ -220,5 +226,5 @@ const makecall = (async (prompt) => {
         submitPressed = false;
         addField();
         //console.log(data);
-        return(newRawData);
+        //return(newRawData);
   });
