@@ -3,9 +3,6 @@
 THE NEWRAWDATA IS CREATED NOT YET RENDERED
 
 Buttons for field and processing call requests
-line by line chatbot 
-
-TODO: Cache current stage and pass to priming mats.
 
 TODO:
 Interaction -> 
@@ -27,6 +24,8 @@ def ask(question, chat_log=None):
     The assistant is somber, creative, and cnocerned.
 
 */
+
+let submitPressed = false;
 
 require('dotenv').config()
 const { Configuration, OpenAIApi } = require("openai");
@@ -60,55 +59,12 @@ document.addEventListener('DOMContentLoaded', function () {
   ui = document.querySelector('.ui');
   primes = document.querySelector('#primes');
   convo = document.querySelector('.convo');
-  //Lprimes = document.querySelector('#Lprimes');
-
-  // set/store user name
-
-  // The first prompt on load
-
-
-  // let initPrompt = `
-  //   <div>
-  //   <p>${prompt01}</p>
-  //   </div>
-  // `
-
-  // ------------------------------------------------------------- // 
-
-  // const p1 = document.createElement('div');
-
-  // p1.innerHTML = initPrompt;
-  // convo.insertAdjacentElement("afterbegin", p1);
-
-
-
-  // btn handling adding fields 
-
-  //document.querySelector('.btn').addEventListener('click',()=>{
-    //Add field btn function
-    
-  //   let field = `
-  //   </br>
-  //     <input type="text" id="userPrimes${nTimesPressed}" name="userPrime">
-  //   `;
-
-  //   let inputField = document.createElement('div');
-  //   inputField.innerHTML = field;
-  //   primes.appendChild(inputField);
-    
-    
-  // });
-
-
-    /*
-     btn handling storing prompts, concacting primes and prompts
-     making calls 
-     */
 
   document.querySelector(`#Lbtnsubmit0`).addEventListener('click',()=>{
 
     // collect the first input and make request 
     
+  if(submitPressed == false){ 
 
       let id = `Linput${nTimesPressed}`
       let input = document.getElementById(`${id}`).value;
@@ -126,13 +82,6 @@ document.addEventListener('DOMContentLoaded', function () {
     //get prompt
     //condition ? exprIfTrue : exprIfFalse
     userInput = `${prompt01}A: ${input}`;
-
-    //console.log(nTimesPressed);
-    
-    //console.log("prompt: " + document.getElementById('prompt').value);
-    //console.log("-------------------------");
-
-    //combine user Priming and prompts 
 
     modelPrompt = primeMats + userInput;
 
@@ -159,8 +108,10 @@ document.addEventListener('DOMContentLoaded', function () {
    
 
     console.log(`call made, nTimePressed = ${nTimesPressed}`);
-    
 
+    submitPressed = true;
+    
+  }
     //primeMats = [];
 
   });
@@ -181,16 +132,6 @@ const addField = () => {
   p.innerHTML = html;
   convo.appendChild(p);
 }
-
-/*
-let text = "Hello world, welcome to the universe.";
-let result = text.indexOf("welcome");
-
-text.slice(0, result);
-
-*/
-
-
 
 
 const makecall = (async (prompt) => {
@@ -228,8 +169,6 @@ const makecall = (async (prompt) => {
         if(index >0){
           newRawData = rawData.slice(index, rawData.length);
           console.log("Slicing: "+ newRawData);
-          
-          
         }else{
           newRawData = rawData;
         }
@@ -278,10 +217,8 @@ const makecall = (async (prompt) => {
         p.innerHTML = html;
         convo.appendChild(p);
 
+        submitPressed = false;
         addField();
         //console.log(data);
         return(newRawData);
-        //typeWriter(displayText, 'valueInput');
   });
-  //makecall("Who's there?");
-//console.log(document.querySelector('.ui').textContent);
