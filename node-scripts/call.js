@@ -29,12 +29,13 @@ const { Configuration, OpenAIApi } = require("openai");
 let ui = null;
 let prompt = null;
 let userInput;
-let  numToken = 8;
+let  numToken = 12;
 let nTimesPressed = 0;
 let prompt01 = "The following is a conversation with new character in a story. The character is somber, dejected, and cnocerned.\nA: When was this?\nB: Sunday afternoon I think, or is it Saturday?\nA: Were you alone?\nB: No, I remember seeing my mom, in the park, but younger.\n";
 let userName = 'user';
 let botName = 'A:';
 let convo = null;
+let whom = null;
 
 // Place to store all the priming dreams
 let primeMats='';
@@ -51,11 +52,14 @@ const configuration = new Configuration({
 
 
 
+
+
 document.addEventListener('DOMContentLoaded', function () {
 
   ui = document.querySelector('.ui');
   primes = document.querySelector('#primes');
   convo = document.querySelector('.convo');
+  whom = document.querySelector('.whom');
 
   document.querySelector(`#Lbtnsubmit0`).addEventListener('click',()=>{
 
@@ -67,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
       let input = document.getElementById(`${id}`).value;
       let INPUT = `
         <div class = 'userArea'>
-          <p>${input}</p>
+          <p> >>> ${input}</p>
         </div>
       `
 
@@ -127,7 +131,7 @@ const addField = () => {
 
   const p = document.createElement('div');
   p.innerHTML = html;
-  convo.appendChild(p);
+  whom.insertAdjacentElement('afterend',p);
 }
 
 
@@ -152,11 +156,11 @@ const makecall = (async (prompt) => {
         //.replace('characterToReplace', '');
         // data.replace(((nTimesPressed%2==1) ? "A:" : "B:"), '');
         let rawData = response.data.choices[0].text;
-        let displayText = `${botName}: ${data}`;
-        displayText = data;
+        let displayText = `benet83: ${data}`;
+        //displayText = data;
 
         let html = `
-            <div class='gentext'>
+            <div class='gentext machineArea'>
                 <p>${displayText}</p>
             </div>
             `;

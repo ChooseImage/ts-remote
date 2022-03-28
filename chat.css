@@ -1,0 +1,193 @@
+* { 
+    /* background-image: url("./src/imgs/liminal.png"); */
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding:0;
+    margin: 0;
+ 
+}
+.to-whom {
+    display: flex;
+}
+
+.bottom-half {
+    margin-top:25px;
+}
+
+#dialog-header{
+   
+    padding:10px;
+    background-color: yellow;
+    margin-bottom: 30px;
+}
+
+#dialog-header p {
+    color:rgb(16, 7, 56);
+    padding:0;
+    margin:0;
+}
+
+#benet{
+    color:greenyellow;
+}
+
+#text-area {
+    margin:0;
+    padding:0;
+}
+
+#send-button {
+    margin:0;
+    padding:0;
+}
+
+.site {
+    margin: 0 10%;
+    max-width: 80%;
+}
+
+.site p {
+    color:white;
+}
+
+#go a{
+    font-size: 24px;
+    color: azure;
+}
+
+
+
+h3 {
+    color:aqua;
+}
+
+/* NAV BAR */
+
+#icon {
+    font-size: 24px;
+    padding:0%;
+}
+
+.topnav {
+    padding-top:5%;
+    overflow: hidden;
+  
+  }
+  
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+.topnav a:hover {
+    background-color: #7e7e7e;
+    color: black;
+  }
+  
+.topnav a.active {
+    
+    color: rgb(252, 98, 231);
+  }
+  
+.topnav-right {
+    float: right;
+  }
+body {
+    background-image: url("./src/imgs/liminal.png");
+    background-color: rgba(16, 7, 56, 0.782);
+    background-repeat: repeat;
+}
+
+.userArea {
+    padding:0 1%;
+    margin:0 1%;
+}
+
+.machineArea{
+    padding:0 1%;
+    margin:0 1%;
+}
+
+p{
+    font-family:'Times New Roman', Times, serif;
+    color:rgb(231, 231, 231);
+    font-size: 1.2em;
+    margin-bottom: 3%;
+
+}
+
+.ui{
+    margin-top: 0%;
+    font-family: 'Times New Roman', Times, serif;
+    padding-top:4%;
+}
+
+.convo {
+    border: 5px solid rgb(214, 214, 214);
+    background-color: rgba(97, 97, 97, 0.856);
+    
+}
+
+
+#Linput0{
+    align-items: right;
+}
+
+
+#Lbtnsubmit0{
+    color:white;
+    align-items: right;
+}
+
+.userArea p{
+    margin-right: 0;
+    color: rgb(250, 209, 209);
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+    margin-left: 0%;
+    margin-top:4%;
+}
+
+.narrative{
+    margin-top: 4%;
+    max-width: 70%;
+    height: auto;
+    margin-left: 15%;
+}
+
+.machineArea p{
+    color:greenyellow;
+}
+
+button {
+    background-color: #4caf4f00;
+    border: 1px solid white;
+    color: white;
+    padding: 4px 6px;
+    font-family:'Times New Roman', Times, serif;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    font-size: 1.2em;
+  }
+
+.gentext p{
+    color:greenyellow;
+}
+
+textarea {
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(250, 209, 209);
+    font-size: 1.2em;
+    background-color: rgba(97, 97, 97, 0.856);
+    border-color: black;
+    border: 5px solid rgb(214, 214, 214);
+    margin-bottom:10px;
+}
