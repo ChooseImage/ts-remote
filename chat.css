@@ -70,7 +70,6 @@ h3 {
 .topnav {
     padding-top:5%;
     overflow: hidden;
-  
   }
   
 .topnav a {
@@ -95,8 +94,9 @@ h3 {
 .topnav-right {
     float: right;
   }
+
 body {
-    background-image: url("./src/imgs/liminal.png");
+    background-image: url("./src/imgs/background.jpg");
     background-color: rgba(16, 7, 56, 0.782);
     background-repeat: repeat;
 }
@@ -133,6 +133,7 @@ p{
 
 
 #Linput0{
+   
     align-items: right;
 }
 
@@ -190,4 +191,5 @@ textarea {
     border-color: black;
     border: 5px solid rgb(214, 214, 214);
     margin-bottom:10px;
+    width:98.7%;
 }
