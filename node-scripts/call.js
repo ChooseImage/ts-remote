@@ -23,23 +23,31 @@ def ask(question, chat_log=None):
 */
 
 let submitPressed = false;
+const priming = require('./priming.json');  // Load the priming data
 
-require('dotenv').config()
+//console.log(priming.mats[0].content);
+
+require('dotenv').config();
+
 const { Configuration, OpenAIApi } = require("openai");
 let ui = null;
 let prompt = null;
 let userInput;
-let  numToken = 12;
+let  numToken = 80;
 let nTimesPressed = 0;
-let prompt01 = "The following is a conversation with new character in a story. The character is somber, dejected, and cnocerned.\nA: When was this?\nB: Sunday afternoon I think, or is it Saturday?\nA: Were you alone?\nB: No, I remember seeing my mom, in the park, but younger.\n";
+
 let userName = 'user';
 let botName = 'A:';
 let convo = null;
 let whom = null;
 
 // Place to store all the priming dreams
+
+let dialog = null; //store all the on going dialog.
 let primeMats='';
-let dialog = prompt01; //store all the on going dialog.
+
+
+
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY
@@ -48,14 +56,66 @@ const configuration = new Configuration({
 
 
 
-//nameInput();
+const loadDialog = (n) => {
+
+  const prompt01 = priming.mats[0].instruction + priming.mats[0].content;
+  dialog = prompt01;
+
+ // Try auto load html element from json prime
+  const instruction =  priming.mats[n].instruction;
+  const mat = priming.mats[n].content;
+
+  convo = document.querySelector('.convo');
+  const element = document.createElement('div');
+
+  // SEPERATE MAT INTO LIST OF SENTENCES
+  mat_splitted = mat.split('\n');
+  console.log(mat_splitted);
+
+  let area = "placeholder";
+  let prompt_element = '';
+
+  for(let i =0; i<mat_splitted.length; i++){
+
+    if(mat_splitted[i][0] === "A"){
+      area = "userArea";
+      let sentence = mat_splitted[i].replace('A:', '');
+      prompt_element += `
+      <div class = 'prompt ${area}'>
+      <p> >>> ${sentence}</p>
+      </div>
+    `;
+
+    }
+
+    if(mat_splitted[i][0] === "B"){
+      area = "machineArea";
+      let sentence = mat_splitted[i].replace('B:', 'benet83: ');
+      prompt_element += `
+      <div class = 'prompt ${area}'>
+      <p>${sentence}</p>
+      </div>
+    `;
+
+    }
+
+  }
+
+  element.innerHTML = prompt_element;
+  convo.insertAdjacentElement("beforeend", element);
+  //console.log(prompt_element)
+
+}
 
 
 
 
+//////////////////////////////////////////////////////
 
 document.addEventListener('DOMContentLoaded', function () {
 
+
+  loadDialog(0);
   ui = document.querySelector('.ui');
   primes = document.querySelector('#primes');
   convo = document.querySelector('.convo');
@@ -82,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(`DIALOG-00: \n${dialog}`);
     //get prompt
     //condition ? exprIfTrue : exprIfFalse
-    userInput = `${prompt01}A: ${input}`;
+    userInput = `${dialog}\nA: ${input}`;
 
     modelPrompt = primeMats + userInput;
 
@@ -147,17 +207,11 @@ const makecall = (async (prompt) => {
           max_tokens:numToken,
           stop: ["A"]
         });
-        
-       // console.log(data);
-        //console.log(prompt+' '+response.data.choices[0].text);
+
         let data = response.data.choices[0].text.replace('###', '').replace('A:', '').replace('B:', '');
-        // data.replace('###', '');
-        // data.replace('A:', '');
-        //.replace('characterToReplace', '');
-        // data.replace(((nTimesPressed%2==1) ? "A:" : "B:"), '');
+
         let rawData = response.data.choices[0].text;
         let displayText = `benet83: ${data}`;
-        //displayText = data;
 
         let html = `
             <div class='gentext machineArea'>

@@ -1,0 +1,31 @@
+* { 
+    /* background-image: url("./src/imgs/liminal.png"); */
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding:0;
+    margin: 0;
+}
+
+.script {
+    margin-bottom: 5%;
+}
+
+h3 {
+    color:white;
+    margin-bottom:14px;
+}
+
+p{
+    color:white;
+}
+
+body {
+    width:80%;
+    margin: 7% 10%;
+}
+
+body {
+    /* background-image: url("./src/imgs/background.jpg"); */
+    background-color: rgba(16, 7, 56, 0.959);
+    background-repeat: repeat;
+}
+
