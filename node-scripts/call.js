@@ -25,7 +25,6 @@ def ask(question, chat_log=None):
 let submitPressed = false;
 const priming = require('./priming.json');  // Load the priming data
 
-//console.log(priming.mats[0].content);
 
 require('dotenv').config();
 
@@ -70,7 +69,7 @@ const loadDialog = (n) => {
 
   // SEPERATE MAT INTO LIST OF SENTENCES
   mat_splitted = mat.split('\n');
-  console.log(mat_splitted);
+  //console.log(mat_splitted);
 
   let area = "placeholder";
   let prompt_element = '';
@@ -135,11 +134,15 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
       `
 
-      dialog += nTimesPressed==0 ? `A: ${input}`: `\nA: ${input}`;
+     // dialog += nTimesPressed==0 ? `A: ${input}`: `\nA: ${input}`;
+      //condition ? exprIfTrue : exprIfFalse
+    // Catching user input that is shorter than 5 char
+     let filler = input.length >5 ? '' : ' Can you tell me more?';
 
+      dialog += `\nA: ${input}${filler}`;
 
+      //console.log(`Linput: ${input.length}`)
     
-    console.log(`DIALOG-00: \n${dialog}`);
     //get prompt
     //condition ? exprIfTrue : exprIfFalse
     userInput = `${dialog}\nA: ${input}`;
@@ -177,7 +180,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   });
 
-  console.log(`DIALOG-01 \n${dialog}`)
 
 });
 
@@ -213,24 +215,12 @@ const makecall = (async (prompt) => {
         let data = response.data.choices[0].text.replace('###', '').replace('A:', '').replace('B:', '');
 
         let rawData = response.data.choices[0].text;
-        let displayText = `benet83: ${data}`;
-
-        let html = `
-            <div class='gentext machineArea'>
-                <p>${displayText}</p>
-            </div>
-            `;
+ 
         
         let index = rawData.indexOf('B:');
+        console.log(`Bindex: ${index}`);
 
-        /*
-          !!!!!!!!
-            Check slice again
-            This appears to generat new responses not appears on console
-          !!!!!!!!
-        */
-
-        if(index <0){
+        if(index != 1){
           console.log(`Original raw: ${rawData}`);
           newRawData = rawData.slice(index, rawData.length);
           console.log("Slicing: "+ newRawData);
@@ -238,17 +228,29 @@ const makecall = (async (prompt) => {
         }else{
           newRawData = rawData;
         }
+        
+        console.log(`newrawdata_length: ${newRawData.length}`);
 
         newRawData.replace('###', '\n');
         console.log(`test-> ${newRawData}`);
+        if (newRawData.length == 1){
+          newRawData += '...';
+        }
+
         dialog+= newRawData;
-        console.log('INDEX: ' + index);
+        //console.log('INDEX: ' + index);
         
-        console.log(`DIALOG-0x \n${dialog}`)
+        console.log(`DIALOG-${nTimesPressed} \n${dialog}`)
         // return html;
         
         
-   
+        let displayText = `benet83: ${newRawData.replace('###', '').replace('A:', '').replace('B:', '')}`;
+
+        let html = `
+            <div class='gentext machineArea'>
+                <p>${displayText}</p>
+            </div>
+            `;
 
         /*
 
