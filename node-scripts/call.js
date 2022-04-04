@@ -177,6 +177,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   });
 
+  console.log(`DIALOG-01 \n${dialog}`)
+
 });
 
 const openai = new OpenAIApi(configuration);
@@ -232,7 +234,7 @@ const makecall = (async (prompt) => {
           console.log(`Original raw: ${rawData}`);
           newRawData = rawData.slice(index, rawData.length);
           console.log("Slicing: "+ newRawData);
-          console.log(dialog);
+          //console.log(dialog);
         }else{
           newRawData = rawData;
         }
@@ -242,10 +244,11 @@ const makecall = (async (prompt) => {
         dialog+= newRawData;
         console.log('INDEX: ' + index);
         
+        console.log(`DIALOG-0x \n${dialog}`)
         // return html;
         
         
-        console.log(`DIALOG-01 \n${dialog}`)
+   
 
         /*
 
