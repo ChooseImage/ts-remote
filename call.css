@@ -3,10 +3,9 @@
     font-family: Georgia, 'Times New Roman', Times, serif;
     padding:0;
     margin: 0;
+    cursor: url('./src/imgs/mouse.png'), auto;	
 }
-.to-whom {
-    display: flex;
-}
+
 
 .bottom-half {
     margin-top:25px;
@@ -63,7 +62,13 @@ h3 {
 
 #icon {
     font-size: 24px;
-    padding:0%;
+    padding:8px 0%;
+    color:#EA526F;
+    font-family: 'Roboto', sans-serif;
+  
+    font-weight: 600;
+    padding-top: 10px;
+    font-size: 36px;
 }
 
 .topnav {
@@ -75,14 +80,21 @@ h3 {
     float: left;
     color: #f2f2f2;
     text-align: center;
-    padding: 14px 16px;
+    padding: 22px 16px;
     text-decoration: none;
+   
     font-size: 17px;
   }
   
 .topnav a:hover {
-    background-color: #7e7e7e;
-    color: black;
+    /* background-color: #7e7e7e; */
+    color: #F6E33F;
+    text-decoration: underline;
+    cursor: url('./src/imgs/finger.png'), auto;	
+  }
+
+  a:hover {
+    cursor: url('./src/imgs/finger.png'), auto;	
   }
   
 .topnav a.active {
@@ -95,8 +107,8 @@ h3 {
   }
 
 body {
-    background-image: url("./src/imgs/background.jpg");
-    background-color: rgba(16, 7, 56, 0.782);
+    background-image: url("./src/imgs/liminalnewsm.png");
+    background-color: rgba(179, 179, 199, 0.782);
     background-repeat: repeat;
 }
 
@@ -147,12 +159,7 @@ p{
     color: rgb(250, 209, 209);
 }
 
-img{
-    max-width: 100%;
-    height: auto;
-    margin-left: 0%;
-    margin-top:4%;
-}
+
 
 .narrative{
     margin-top: 4%;
@@ -193,14 +200,47 @@ textarea {
     width:98.7%;
 }
 
-img{
+.about-content {
+    margin: 0 10%;
+    width:80%;
+}
 
-  }
+
+.about-content > * {
+    margin: 30px 0;
+}
+
+
+.about-content p{
+    margin:0;
+    line-height: 140%;
+    letter-spacing: .1rem;
+}
+
+.about-content a{
+    color: #00ffff;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+    margin-left: 0%;
+}
+
 
 .hero{
-    margin: 0 10%;
-    max-width: 80%;
-   
     align-content: center;
     align-self: center;
 }
+
+h2 {
+    font-family: 'Roboto', sans-serif;
+    font-style: italic;
+    font-weight: 400;
+    padding-top: 10px;
+    font-size: 28px;
+    color: #F6E33F;
+}
+
+
+

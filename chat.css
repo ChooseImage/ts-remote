@@ -3,7 +3,15 @@
     font-family: Georgia, 'Times New Roman', Times, serif;
     padding:0;
     margin: 0;
+    cursor: url('./src/imgs/mouse.png'), auto;	
 }
+
+
+.module {
+  
+}
+
+
 .to-whom {
     display: flex;
 }
@@ -15,12 +23,13 @@
 #dialog-header{
    
     padding:10px;
-    background-color: yellow;
+    background-color: #c4f5c3;
     margin-bottom: 30px;
+    border-style: outset;
 }
 
 #dialog-header p {
-    color:rgb(16, 7, 56);
+    color:#023047;
     padding:0;
     margin:0;
 }
@@ -63,7 +72,13 @@ h3 {
 
 #icon {
     font-size: 24px;
-    padding:0%;
+    padding:8px 0%;
+    color:#EA526F;
+    font-family: 'Roboto', sans-serif;
+  
+    font-weight: 600;
+    padding-top: 10px;
+    font-size: 36px;
 }
 
 .topnav {
@@ -75,14 +90,17 @@ h3 {
     float: left;
     color: #f2f2f2;
     text-align: center;
-    padding: 14px 16px;
+    padding: 22px 16px;
     text-decoration: none;
+   
     font-size: 17px;
   }
   
 .topnav a:hover {
-    background-color: #7e7e7e;
-    color: black;
+    /* background-color: #cacaca; */
+    color: #F6E33F;
+    text-decoration: underline;
+    cursor: url('./src/imgs/finger.png'), auto;	
   }
   
 .topnav a.active {
@@ -95,7 +113,7 @@ h3 {
   }
 
 body {
-    background-image: url("./src/imgs/background.jpg");
+    background-image: url("./src/imgs/liminalnewsm.png");
     background-color: rgba(16, 7, 56, 0.782);
     background-repeat: repeat;
 }
@@ -125,9 +143,9 @@ p{
 }
 
 .convo {
-    border: 5px solid rgb(214, 214, 214);
-    background-color: rgba(97, 97, 97, 0.856);
-    
+    border: 5px solid #d1ffbc;
+    background-color: rgba(134, 134, 134, 0.382);
+    border-style: double;
 }
 
 
@@ -176,6 +194,21 @@ button {
     display: block;
     cursor: pointer;
     font-size: 1.2em;
+    
+  }
+
+button:hover {
+    background-color: #d1ffbc;
+    border: 1px solid #d1ffbc;
+    color: #EA526F;
+    padding: 4px 6px;
+    font-family:'Times New Roman', Times, serif;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    font-size: 1.2em;
+    cursor: url('./src/imgs/finger.png'), auto;	
   }
 
 .gentext p{
@@ -186,9 +219,11 @@ textarea {
     font-family: 'Times New Roman', Times, serif;
     color: rgb(250, 209, 209);
     font-size: 1.2em;
-    background-color: rgba(97, 97, 97, 0.856);
-    border-color: black;
-    border: 5px solid rgb(214, 214, 214);
+    border: 5px solid #d1ffbc;
+    background-color: rgba(134, 134, 134, 0.382);
     margin-bottom:10px;
     width:98.7%;
+    padding:4px;
+    border-style: double;
+    
 }
