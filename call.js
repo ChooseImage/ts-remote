@@ -22,6 +22,7 @@ def ask(question, chat_log=None):
 
 */
 
+//test
 let submitPressed = false;
 const priming = require('./priming.json');  // Load the priming data
 
